@@ -713,7 +713,7 @@ elif page == "Projects":
             ))
 
         fig.add_vline(
-            x=pd.Timestamp("2026-02-14"),
+            x="2026-02-14",
             line_dash="dash", line_color=ZIMPLATS_NAVY, line_width=2,
             annotation_text="Today",
             annotation_font_color=ZIMPLATS_NAVY,
