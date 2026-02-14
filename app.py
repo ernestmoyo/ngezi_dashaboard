@@ -693,42 +693,64 @@ elif page == "Projects":
             "unknown": "#95A5A6",
         }
 
+        # Build Gantt using Scatter with wide markers for full compatibility
+        project_names = gantt_data["project_name"].str[:45].tolist()
+
         fig = go.Figure()
-        for _, row in gantt_data.iterrows():
+
+        for idx, (_, row) in enumerate(gantt_data.iterrows()):
             color = status_colors.get(row["status"], "#95A5A6")
-            fig.add_trace(go.Bar(
-                x=[(row["end"] - row["start"]).days],
-                y=[row["project_name"][:45]],
-                orientation="h",
-                base=row["start"],
-                marker_color=color,
+            start = row["start"]
+            end = row["end"]
+            mid = start + (end - start) / 2
+
+            fig.add_trace(go.Scatter(
+                x=[start, end],
+                y=[row["project_name"][:45], row["project_name"][:45]],
+                mode="lines",
+                line=dict(color=color, width=20),
                 showlegend=False,
-                hovertemplate=(
+                hoverinfo="text",
+                hovertext=(
                     f"<b>{row['project_name']}</b><br>"
                     f"Status: {row['status'].replace('_', ' ').title()}<br>"
                     f"Due: {row['planned_completion'].strftime('%d %b %Y')}<br>"
                     f"Responsible: {row['responsible']}"
-                    "<extra></extra>"
                 ),
             ))
 
+        # Today marker
         fig.add_shape(
             type="line", x0="2026-02-14", x1="2026-02-14", y0=0, y1=1,
-            yref="paper", line=dict(dash="dash", color=ZIMPLATS_NAVY, width=2),
+            yref="paper", line=dict(dash="dash", color=ACCENT_RED, width=2),
         )
         fig.add_annotation(
-            x="2026-02-14", y=1, yref="paper",
+            x="2026-02-14", y=1.02, yref="paper",
             text="Today", showarrow=False,
-            font=dict(color=ZIMPLATS_NAVY, size=11),
-            yshift=10,
+            font=dict(color=ACCENT_RED, size=11, weight="bold"),
         )
 
+        # Legend for statuses
+        for status, label, color in [
+            ("completed", "Completed", ACCENT_GREEN),
+            ("in_progress", "In Progress", ACCENT_AMBER),
+            ("pending", "Pending", ACCENT_RED),
+        ]:
+            if status in gantt_data["status"].values:
+                fig.add_trace(go.Scatter(
+                    x=[None], y=[None], mode="lines",
+                    line=dict(color=color, width=10),
+                    name=label,
+                ))
+
         fig.update_layout(
-            height=max(350, len(gantt_data) * 38),
-            xaxis_type="date",
+            height=max(400, len(gantt_data) * 42),
+            xaxis=dict(type="date", gridcolor="#E5E8EB"),
+            yaxis=dict(autorange="reversed", gridcolor="#E5E8EB"),
             plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
-            margin=dict(l=10, r=20, t=10, b=40),
+            margin=dict(l=10, r=20, t=30, b=40),
             font=dict(family="Segoe UI, sans-serif"),
+            legend=dict(orientation="h", yanchor="bottom", y=1.04, xanchor="left", x=0),
         )
         st.plotly_chart(fig, use_container_width=True)
 
