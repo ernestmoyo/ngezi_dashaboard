@@ -13,6 +13,7 @@ env/
 *.xlsx
 *.docx
 *.pptx
+*_prompt.md
 .idea/
 .vscode/
 *.swp
