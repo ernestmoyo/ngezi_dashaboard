@@ -712,11 +712,15 @@ elif page == "Projects":
                 ),
             ))
 
-        fig.add_vline(
-            x="2026-02-14",
-            line_dash="dash", line_color=ZIMPLATS_NAVY, line_width=2,
-            annotation_text="Today",
-            annotation_font_color=ZIMPLATS_NAVY,
+        fig.add_shape(
+            type="line", x0="2026-02-14", x1="2026-02-14", y0=0, y1=1,
+            yref="paper", line=dict(dash="dash", color=ZIMPLATS_NAVY, width=2),
+        )
+        fig.add_annotation(
+            x="2026-02-14", y=1, yref="paper",
+            text="Today", showarrow=False,
+            font=dict(color=ZIMPLATS_NAVY, size=11),
+            yshift=10,
         )
 
         fig.update_layout(
