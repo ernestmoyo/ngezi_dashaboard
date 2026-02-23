@@ -1,7 +1,7 @@
 """
-Simulated data generator for the Ngezi Concentrator dashboard.
+Simulated data generator for the Concentrator dashboard.
 
-Generates realistic production data based on typical Ngezi plant parameters.
+Generates realistic production data based on typical plant parameters.
 All values are synthetic — no real operational data is used.
 """
 

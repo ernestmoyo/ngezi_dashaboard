@@ -1,5 +1,5 @@
 """
-Ngezi Concentrator — Mine Manager Oversight Dashboard
+Mine Manager Oversight Dashboard
 
 Analytics backend for transforming Excel/Word production reports
 into a unified, dashboard-ready data layer.

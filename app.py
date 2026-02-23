@@ -1,5 +1,5 @@
 """
-Ngezi Concentrator — Mine Manager Oversight Dashboard
+Mine Manager Oversight Dashboard
 
 Run with:  streamlit run app.py
 """
@@ -85,7 +85,7 @@ def kpi_unit(name: str) -> str:
 # Page config & global CSS
 # ---------------------------------------------------------------------------
 st.set_page_config(
-    page_title="Ngezi Concentrator Dashboard",
+    page_title="Concentrator Dashboard",
     page_icon="⛏️",
     layout="wide",
     initial_sidebar_state="expanded",
@@ -278,7 +278,7 @@ data = load_data()
 # ---------------------------------------------------------------------------
 # Sidebar
 # ---------------------------------------------------------------------------
-st.sidebar.markdown("### Ngezi Concentrator")
+st.sidebar.markdown("### Concentrator")
 st.sidebar.caption("Mine Manager Oversight Dashboard")
 st.sidebar.divider()
 

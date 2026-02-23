@@ -1,5 +1,5 @@
 """
-Ngezi Concentrator — End-to-end analytics pipeline.
+Concentrator — End-to-end analytics pipeline.
 
 Runs the full data pipeline from source files to dashboard-ready outputs
 and prints smoke-test summaries.

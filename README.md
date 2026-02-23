@@ -1,6 +1,6 @@
-# Ngezi Concentrator — Mine Manager Oversight Dashboard
+# Mine Manager Oversight Dashboard
 
-Interactive analytics dashboard for the **Ngezi Platinum Concentrator** (Zimplats Holdings, Member of the Implats Group).
+Interactive analytics dashboard for a platinum concentrator operation.
 
 Transforms production data from conveyor belt weigh sensors, DCS historian exports, and operational reports into a unified dashboard with real-time KPI tracking, RAG performance classification, and executive summaries.
 

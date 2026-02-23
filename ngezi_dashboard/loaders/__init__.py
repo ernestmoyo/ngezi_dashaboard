@@ -1,4 +1,4 @@
-"""Data ingestion loaders for Ngezi Concentrator source files."""
+"""Data ingestion loaders for Concentrator source files."""
 
 from .kpi_scorecard import load_kpi_scorecard
 from .mill_ball import load_mill_ball_trends

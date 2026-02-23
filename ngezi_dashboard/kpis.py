@@ -118,7 +118,7 @@ def summarise_daily_to_monthly(df_daily: pd.DataFrame) -> pd.DataFrame:
         return pd.DataFrame()
 
     result = df.groupby("month").agg(agg_dict).reset_index()
-    result.insert(1, "plant", df["plant"].iloc[0] if "plant" in df.columns else "Ngezi Concentrator")
+    result.insert(1, "plant", df["plant"].iloc[0] if "plant" in df.columns else "Concentrator")
 
     logger.info("Summarised daily data to %d monthly rows", len(result))
     return result
