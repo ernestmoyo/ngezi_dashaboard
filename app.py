@@ -50,7 +50,7 @@ KPI_DISPLAY_NAMES = {
     "plant_running_time_pct": "Plant Running Time",
     "mass_pull_pct": "Mass Pull",
     "recovery_6e_pct": "6E Recovery",
-    "mill_ball_consumption_gt": "Mill Ball Consumption",
+    "mill_ball_consumption_gt": "Ball Mill Consumption",
     "filter_cake_moisture_pct": "Filter Cake Moisture",
     "metal_unaccounted_for_pct": "Metal Unaccounted For",
     "raw_water_m3t": "Raw Water Consumption",
@@ -95,15 +95,85 @@ st.markdown(f"""
 <style>
     /* Sidebar */
     section[data-testid="stSidebar"] {{
-        background: {ZIMPLATS_NAVY};
+        background: linear-gradient(180deg, {ZIMPLATS_NAVY} 0%, rgba(0, 59, 113, 0.95) 100%);
+        padding-top: 20px !important;
     }}
+    
     section[data-testid="stSidebar"] * {{
         color: {ZIMPLATS_WHITE} !important;
     }}
+    
+    section[data-testid="stSidebar"] h1,
+    section[data-testid="stSidebar"] h2,
+    section[data-testid="stSidebar"] h3 {{
+        color: {ZIMPLATS_WHITE} !important;
+        font-weight: 700 !important;
+        letter-spacing: 0.5px;
+    }}
+    
     section[data-testid="stSidebar"] .stSelectbox label,
     section[data-testid="stSidebar"] .stRadio label {{
         color: {ZIMPLATS_WHITE} !important;
-        font-weight: 500;
+        font-weight: 600 !important;
+        font-size: 14px !important;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }}
+    
+    /* Improve sidebar dividers */
+    section[data-testid="stSidebar"] hr {{
+        border-color: rgba(255, 255, 255, 0.2) !important;
+        margin: 16px 0 !important;
+    }}
+    
+    /* Sidebar selectbox styling */
+    section[data-testid="stSidebar"] .stSelectbox > div > div {{
+        background-color: rgba(255, 255, 255, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.3) !important;
+        border-radius: 8px !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stSelectbox > div > div > div {{
+        color: {ZIMPLATS_WHITE} !important;
+    }}
+    
+    /* Sidebar radio button styling */
+    section[data-testid="stSidebar"] .stRadio > div {{
+        background-color: transparent !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stRadio > div > label {{
+        background-color: transparent !important;
+        border-radius: 8px !important;
+        padding: 10px 12px !important;
+        margin: 6px 0 !important;
+        transition: all 0.2s ease;
+    }}
+    
+    section[data-testid="stSidebar"] .stRadio > div > label:hover {{
+        background-color: rgba(255, 255, 255, 0.1) !important;
+    }}
+    
+    section[data-testid="stSidebar"] .stRadio > div > label[data-checked="true"] {{
+        background-color: {ZIMPLATS_BLUE} !important;
+        box-shadow: 0 2px 8px rgba(0, 102, 179, 0.3);
+    }}
+    
+    /* Sidebar captions */
+    section[data-testid="stSidebar"] .stCaption {{
+        color: rgba(255, 255, 255, 0.8) !important;
+        font-size: 12px !important;
+        margin-top: 12px !important;
+    }}
+    
+    /* Sidebar image styling */
+    section[data-testid="stSidebar"] img {{
+        background: {ZIMPLATS_WHITE} !important;
+        padding: 16px !important;
+        border-radius: 10px !important;
+        display: block !important;
+        margin: 0 auto 24px auto !important;
+        filter: brightness(1) drop-shadow(0 2px 8px rgba(0, 59, 113, 0.15));
     }}
 
     /* Header bar */
@@ -302,7 +372,7 @@ if page == "Executive Summary":
         ("crushed_tonnage", "Crushed Tonnage", "t"),
         ("milled_tonnage", "Milled Tonnage", "t"),
         ("recovery_6e_pct", "6E Recovery", "%"),
-        ("mill_ball_consumption_gt", "Mill Ball Consumption", "g/t"),
+        ("mill_ball_consumption_gt", "Ball Mill Consumption", "g/t"),
         ("raw_water_m3t", "Raw Water Consumption", "m\u00b3/t"),
         ("total_cost", "Total Cost", "USD/t"),
     ]
