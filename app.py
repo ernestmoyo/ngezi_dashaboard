@@ -27,11 +27,11 @@ from ngezi_dashboard.simulator import (
 # ---------------------------------------------------------------------------
 # Branding
 # ---------------------------------------------------------------------------
-ZIMPLATS_NAVY = "#003B71"
-ZIMPLATS_BLUE = "#0066B3"
-ZIMPLATS_LIGHT = "#E8F0FE"
-ZIMPLATS_WHITE = "#FFFFFF"
-ZIMPLATS_GREY = "#F5F7FA"
+BRAND_NAVY = "#003B71"
+BRAND_BLUE = "#0066B3"
+BRAND_LIGHT = "#E8F0FE"
+BRAND_WHITE = "#FFFFFF"
+BRAND_GREY = "#F5F7FA"
 ACCENT_GREEN = "#27AE60"
 ACCENT_AMBER = "#F39C12"
 ACCENT_RED = "#E74C3C"
@@ -39,7 +39,7 @@ ACCENT_RED = "#E74C3C"
 RAG_COLORS = {"green": ACCENT_GREEN, "amber": ACCENT_AMBER, "red": ACCENT_RED, "grey": "#95A5A6"}
 RAG_BG = {"green": "#E8F8F0", "amber": "#FEF5E7", "red": "#FDEDEC", "grey": "#F2F3F4"}
 
-LOGO_PATH = Path(__file__).parent / "assets" / "zimplats_logo.png"
+LOGO_PATH = None  # Logo removed for confidentiality
 
 # Proper display names for KPIs
 KPI_DISPLAY_NAMES = {
@@ -95,25 +95,25 @@ st.markdown(f"""
 <style>
     /* Sidebar */
     section[data-testid="stSidebar"] {{
-        background: linear-gradient(180deg, {ZIMPLATS_NAVY} 0%, rgba(0, 59, 113, 0.95) 100%);
+        background: linear-gradient(180deg, {BRAND_NAVY} 0%, rgba(0, 59, 113, 0.95) 100%);
         padding-top: 20px !important;
     }}
     
     section[data-testid="stSidebar"] * {{
-        color: {ZIMPLATS_WHITE} !important;
+        color: {BRAND_WHITE} !important;
     }}
     
     section[data-testid="stSidebar"] h1,
     section[data-testid="stSidebar"] h2,
     section[data-testid="stSidebar"] h3 {{
-        color: {ZIMPLATS_WHITE} !important;
+        color: {BRAND_WHITE} !important;
         font-weight: 700 !important;
         letter-spacing: 0.5px;
     }}
     
     section[data-testid="stSidebar"] .stSelectbox label,
     section[data-testid="stSidebar"] .stRadio label {{
-        color: {ZIMPLATS_WHITE} !important;
+        color: {BRAND_WHITE} !important;
         font-weight: 600 !important;
         font-size: 14px !important;
         text-transform: uppercase;
@@ -134,7 +134,7 @@ st.markdown(f"""
     }}
     
     section[data-testid="stSidebar"] .stSelectbox > div > div > div {{
-        color: {ZIMPLATS_WHITE} !important;
+        color: {BRAND_WHITE} !important;
     }}
     
     /* Sidebar radio button styling */
@@ -155,7 +155,7 @@ st.markdown(f"""
     }}
     
     section[data-testid="stSidebar"] .stRadio > div > label[data-checked="true"] {{
-        background-color: {ZIMPLATS_BLUE} !important;
+        background-color: {BRAND_BLUE} !important;
         box-shadow: 0 2px 8px rgba(0, 102, 179, 0.3);
     }}
     
@@ -166,19 +166,9 @@ st.markdown(f"""
         margin-top: 12px !important;
     }}
     
-    /* Sidebar image styling */
-    section[data-testid="stSidebar"] img {{
-        background: {ZIMPLATS_WHITE} !important;
-        padding: 16px !important;
-        border-radius: 10px !important;
-        display: block !important;
-        margin: 0 auto 24px auto !important;
-        filter: brightness(1) drop-shadow(0 2px 8px rgba(0, 59, 113, 0.15));
-    }}
-
     /* Header bar */
     .header-bar {{
-        background: linear-gradient(135deg, {ZIMPLATS_NAVY}, {ZIMPLATS_BLUE});
+        background: linear-gradient(135deg, {BRAND_NAVY}, {BRAND_BLUE});
         padding: 20px 32px;
         border-radius: 12px;
         margin-bottom: 24px;
@@ -214,13 +204,13 @@ st.markdown(f"""
         font-weight: 600;
         text-transform: uppercase;
         letter-spacing: 0.5px;
-        color: {ZIMPLATS_NAVY};
+        color: {BRAND_NAVY};
         margin-bottom: 6px;
     }}
     .kpi-value {{
         font-size: 30px;
         font-weight: 700;
-        color: {ZIMPLATS_NAVY};
+        color: {BRAND_NAVY};
     }}
     .kpi-unit {{
         font-size: 13px;
@@ -253,7 +243,7 @@ st.markdown(f"""
 
     /* Table styling */
     .stDataFrame th {{
-        background: {ZIMPLATS_NAVY} !important;
+        background: {BRAND_NAVY} !important;
         color: white !important;
     }}
 </style>
@@ -288,11 +278,8 @@ data = load_data()
 # ---------------------------------------------------------------------------
 # Sidebar
 # ---------------------------------------------------------------------------
-if LOGO_PATH.exists():
-    st.sidebar.image(str(LOGO_PATH), width=200)
 st.sidebar.markdown("### Ngezi Concentrator")
 st.sidebar.caption("Mine Manager Oversight Dashboard")
-st.sidebar.caption("Eng. Adios Shumba — Mine Manager")
 st.sidebar.divider()
 
 available_periods = sorted(data["quarterly"]["period"].unique().tolist())
@@ -308,8 +295,7 @@ page = st.sidebar.radio(
 )
 
 st.sidebar.divider()
-st.sidebar.caption("Zimplats Holdings Limited")
-st.sidebar.caption("Member of the Implats Group")
+st.sidebar.caption("Concentrator Operations")
 
 
 # ---------------------------------------------------------------------------
@@ -464,7 +450,7 @@ if page == "Executive Summary":
                 margin=dict(l=10, r=40, t=10, b=40),
                 font=dict(family="Segoe UI, sans-serif"),
             )
-            fig.add_vline(x=0, line_dash="dash", line_color=ZIMPLATS_NAVY, line_width=1)
+            fig.add_vline(x=0, line_dash="dash", line_color=BRAND_NAVY, line_width=1)
             st.plotly_chart(fig, use_container_width=True)
 
 
@@ -494,8 +480,8 @@ elif page == "KPI Trends":
                 y=kpi_data["actual"],
                 name="Actual",
                 mode="lines+markers",
-                line=dict(color=ZIMPLATS_BLUE, width=3),
-                marker=dict(size=8, color=ZIMPLATS_BLUE),
+                line=dict(color=BRAND_BLUE, width=3),
+                marker=dict(size=8, color=BRAND_BLUE),
                 fill="tozeroy",
                 fillcolor=f"rgba(0,102,179,0.08)",
             ))
@@ -508,7 +494,7 @@ elif page == "KPI Trends":
                 marker=dict(size=6, symbol="diamond", color=ACCENT_RED),
             ))
             fig.update_layout(
-                title=dict(text=f"{selected_display} \u2014 Actual vs Budget", font=dict(size=16, color=ZIMPLATS_NAVY)),
+                title=dict(text=f"{selected_display} \u2014 Actual vs Budget", font=dict(size=16, color=BRAND_NAVY)),
                 yaxis_title=unit,
                 height=420,
                 plot_bgcolor="rgba(0,0,0,0)",
@@ -531,7 +517,7 @@ elif page == "KPI Trends":
                 st.markdown(
                     f"<div style='border-left: 3px solid {color}; padding: 6px 10px; "
                     f"margin: 4px 0; border-radius: 0 4px 4px 0; background: {RAG_BG[rag]};'>"
-                    f"<b style='color:{ZIMPLATS_NAVY};'>{month_label}</b>"
+                    f"<b style='color:{BRAND_NAVY};'>{month_label}</b>"
                     f"<span style='float:right; color:{color}; font-weight:600;'>{var_str}</span></div>",
                     unsafe_allow_html=True,
                 )
@@ -565,7 +551,7 @@ elif page == "Daily Production":
     fig = go.Figure()
     fig.add_trace(go.Bar(
         x=daily["date"], y=daily["milled_tonnage_actual"],
-        name="Actual", marker_color=ZIMPLATS_BLUE, opacity=0.85,
+        name="Actual", marker_color=BRAND_BLUE, opacity=0.85,
     ))
     fig.add_trace(go.Scatter(
         x=daily["date"], y=daily["milled_tonnage_target"],
@@ -573,7 +559,7 @@ elif page == "Daily Production":
         line=dict(color=ACCENT_RED, width=2, dash="dash"),
     ))
     fig.update_layout(
-        title=dict(text="Daily Milled Tonnage", font=dict(color=ZIMPLATS_NAVY)),
+        title=dict(text="Daily Milled Tonnage", font=dict(color=BRAND_NAVY)),
         yaxis_title="Tonnes", height=380,
         plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
         font=dict(family="Segoe UI, sans-serif"),
@@ -591,7 +577,7 @@ elif page == "Daily Production":
             x=daily["date"], y=variance, marker_color=colors,
         ))
         fig2.update_layout(
-            title=dict(text="Daily Variance", font=dict(color=ZIMPLATS_NAVY)),
+            title=dict(text="Daily Variance", font=dict(color=BRAND_NAVY)),
             yaxis_title="Tonnes", height=320,
             plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Segoe UI, sans-serif"),
@@ -604,7 +590,7 @@ elif page == "Daily Production":
         fig3.add_trace(go.Scatter(
             x=daily["date"], y=daily["cum_actual"],
             name="Cumulative Actual", fill="tozeroy",
-            line=dict(color=ZIMPLATS_BLUE, width=2),
+            line=dict(color=BRAND_BLUE, width=2),
             fillcolor="rgba(0,102,179,0.1)",
         ))
         fig3.add_trace(go.Scatter(
@@ -613,7 +599,7 @@ elif page == "Daily Production":
             line=dict(color=ACCENT_RED, dash="dash", width=2),
         ))
         fig3.update_layout(
-            title=dict(text="Cumulative Tonnage", font=dict(color=ZIMPLATS_NAVY)),
+            title=dict(text="Cumulative Tonnage", font=dict(color=BRAND_NAVY)),
             yaxis_title="Tonnes", height=320,
             plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Segoe UI, sans-serif"),
@@ -653,11 +639,11 @@ elif page == "Consumables":
             fig = go.Figure()
             fig.add_trace(go.Bar(
                 x=active_reagents["consumable"], y=active_reagents["actual"],
-                name="Actual", marker_color=ZIMPLATS_BLUE,
+                name="Actual", marker_color=BRAND_BLUE,
             ))
             fig.add_trace(go.Bar(
                 x=active_reagents["consumable"], y=active_reagents["budget"],
-                name="Budget", marker_color=ZIMPLATS_NAVY, opacity=0.3,
+                name="Budget", marker_color=BRAND_NAVY, opacity=0.3,
             ))
             fig.update_layout(
                 barmode="group", height=380,
@@ -691,10 +677,10 @@ elif page == "Consumables":
         fig.add_trace(go.Bar(
             x=mb["month"], y=mb["mill1_steel_t"],
             name="Monthly Consumption",
-            marker_color=ZIMPLATS_BLUE, opacity=0.7,
+            marker_color=BRAND_BLUE, opacity=0.7,
         ))
         fig.update_layout(
-            title=dict(text="Mill 1 (Anhui) \u2014 Stock Projection", font=dict(color=ZIMPLATS_NAVY)),
+            title=dict(text="Mill 1 (Anhui) \u2014 Stock Projection", font=dict(color=BRAND_NAVY)),
             yaxis_title="Tonnes", height=420,
             plot_bgcolor="rgba(0,0,0,0)", paper_bgcolor="rgba(0,0,0,0)",
             font=dict(family="Segoe UI, sans-serif"),
@@ -720,7 +706,7 @@ elif page == "Consumables":
 # PAGE: Projects
 # ===========================================================================
 elif page == "Projects":
-    render_header("Concentrator Projects", "Status as at 14 February 2026")
+    render_header("Concentrator Projects", "Status as at 23 February 2026")
 
     dim_proj = data["dim_project"]
     fact_proj = data["fact_project"]
@@ -739,11 +725,11 @@ elif page == "Projects":
         with cols[i]:
             count = status_counts.get(status, 0)
             st.markdown(
-                f"<div style='text-align:center; padding:16px; background:{ZIMPLATS_WHITE}; "
+                f"<div style='text-align:center; padding:16px; background:{BRAND_WHITE}; "
                 f"border-radius:10px; border-top:4px solid {color}; "
                 f"box-shadow: 0 2px 8px rgba(0,0,0,0.05);'>"
                 f"<div style='font-size:32px; font-weight:700; color:{color};'>{count}</div>"
-                f"<div style='font-size:13px; color:{ZIMPLATS_NAVY}; font-weight:500;'>{label}</div></div>",
+                f"<div style='font-size:13px; color:{BRAND_NAVY}; font-weight:500;'>{label}</div></div>",
                 unsafe_allow_html=True,
             )
 
@@ -792,11 +778,11 @@ elif page == "Projects":
 
         # Today marker
         fig.add_shape(
-            type="line", x0="2026-02-14", x1="2026-02-14", y0=0, y1=1,
+            type="line", x0="2026-02-23", x1="2026-02-23", y0=0, y1=1,
             yref="paper", line=dict(dash="dash", color=ACCENT_RED, width=2),
         )
         fig.add_annotation(
-            x="2026-02-14", y=1.02, yref="paper",
+            x="2026-02-23", y=1.02, yref="paper",
             text="Today", showarrow=False,
             font=dict(color=ACCENT_RED, size=11, weight="bold"),
         )

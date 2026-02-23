@@ -111,11 +111,11 @@ def generate_monthly_kpis(
 
 
 def generate_quarterly_kpis() -> pd.DataFrame:
-    """Generate simulated quarterly KPI summary for the current fiscal year."""
+    """Generate simulated quarterly KPI summary using calendar quarters."""
     quarters = {
-        "FY2026-Q1": ("2025-07-01", 3),
-        "FY2026-Q2": ("2025-10-01", 3),
-        "FY2026-Q3-MTD": ("2026-01-01", 2),  # current quarter, 2 months in
+        "2025-Q3": ("2025-07-01", 3),
+        "2025-Q4": ("2025-10-01", 3),
+        "2026-Q1-MTD": ("2026-01-01", 2),  # current quarter, 2 months in
     }
 
     monthly = generate_monthly_kpis("2025-07-01", 8)
@@ -163,7 +163,7 @@ def generate_quarterly_kpis() -> pd.DataFrame:
 def generate_daily_production(
     year: int = 2026,
     month: int = 2,
-    days: int = 14,
+    days: int = 23,
 ) -> pd.DataFrame:
     """Generate simulated daily milled tonnage for the current month."""
     dates = pd.date_range(f"{year}-{month:02d}-01", periods=days, freq="D")
@@ -208,7 +208,7 @@ def generate_projects() -> tuple[pd.DataFrame, pd.DataFrame]:
     """Generate simulated project dimension and status tables."""
     dim_rows = []
     status_rows = []
-    snapshot_date = pd.Timestamp("2026-02-14")
+    snapshot_date = pd.Timestamp("2026-02-23")
 
     for pid, name, resp, completion, status, comment in _PROJECTS:
         dim_rows.append({
