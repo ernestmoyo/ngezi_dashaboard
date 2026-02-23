@@ -292,6 +292,7 @@ if LOGO_PATH.exists():
     st.sidebar.image(str(LOGO_PATH), width=200)
 st.sidebar.markdown("### Ngezi Concentrator")
 st.sidebar.caption("Mine Manager Oversight Dashboard")
+st.sidebar.caption("Adios Shumba — Mine Manager")
 st.sidebar.divider()
 
 available_periods = sorted(data["quarterly"]["period"].unique().tolist())
